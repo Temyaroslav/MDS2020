@@ -1,0 +1,18 @@
+Препроцессинг:
+$ g++ -E -o hello1.cpp hello.cpp
+Компиляция:
+$ g++ -c -o hello.o hello1.cpp
+Компоновка:
+$ g++ -o hello hello.o
+
+Makefile:
+program: program.o mylib.o
+        g++ -o program program.o mylib.o
+
+program.o: program.cpp mylib.hpp
+        g++ -c program.cpp
+
+mylib.o: mylib.cpp mylib.hpp
+        g++ -c hylib.cpp
+
+Ref: http://cs.mipt.ru/cpp_algo/labs/lab1.html
