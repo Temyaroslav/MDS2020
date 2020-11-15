@@ -1,8 +1,14 @@
-x, p, y = int(input()), int(input()), int(input())
-i = 1
-while x < y:
-    x *= (1 + p/100)
-    x = round(x, 2)
-    i += 1
-    
- print("end")
+def succ(x):
+    return x + 1
+
+def pre(x):
+    return x - 1
+
+def main(x, y):
+    if y == 0:
+        return x
+    else:
+        return main(succ(x), pre(y))
+
+if __name__ == '__main__':
+    print(main(int(input()), int(input())))
