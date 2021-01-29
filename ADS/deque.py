@@ -60,7 +60,7 @@ class Deque:
             self._front = -1
             self._rear = 0
         else:
-            if self._front == self._size:
+            if self._front == self._size - 1:
                 self._front = 0
             else:
                 self._front += 1
