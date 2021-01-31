@@ -55,6 +55,27 @@ def find_unique(a):
     return unique
 
 
+def moving_average(a, k):
+    '''
+    Given an array aa, a sliding window of size kk  is moving from the very left of the array to the very right.
+    Each time the sliding window moves right by one position. For each sliding window position return average value of
+    all numbers inside the sliding window.
+    :param a: list, a=[1,2,3,4,8]
+    :param k: int
+    :return:
+    '''
+    sum = 0
+    for i in range(k):
+        sum += a[i]
+    window_sum = [sum]
+    left, right = 0, k - 1
+    while right + 1 < len(a):
+        window_sum.append(window_sum[len(window_sum) - 1] + a[right + 1] - a[left])
+        right += 1
+        left += 1
+    return [x * 1.0 / k for x in window_sum]
+
+
 if __name__ == '__main__':
     a = [0, 0, 10, 20, 30]
     print(find_numbers(a, 10))
