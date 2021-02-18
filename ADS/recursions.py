@@ -1,3 +1,5 @@
+import math
+
 def double_factorial(n):
     if n <= 1:
         return 1
@@ -101,6 +103,49 @@ def slogan(words, L):
     without_last_word = words[:-1]
     return slogan(without_last_word, L) or slogan(without_last_word, L - len(last_word) - 1)
 
+def voc_to_list(vocabulary):
+    """
+    produces a list lengths such that lengths[i] is the number of
+    words in length i in vocabulary
+    """
+    max_len = max([len(w) for w in vocabulary])
+    lengths = [0] * (max_len + 1)
+    for w in vocabulary:
+        lengths[len(w)] += 1
+    return lengths
+
+def passwords(L, vocabulary):
+    lengths = voc_to_list(vocabulary)
+    k = len(lengths)
+    tbl = [0] * (L + 1)
+    for i in range(L + 1):
+        if i < k:
+            tbl[i] = lengths[i]
+        for j in range(min(k, i)):
+            tbl[i] += tbl[i - j - 1] * lengths[j]
+    return tbl[L]
+
+def num_boxes(n):
+    tbl = [math.inf] * (n + 1)
+    tbl[0] = 0
+    last = [0] * (n + 1)
+    for j in range(1, n + 1):
+        i = 1
+        while i**3 <= j:
+            # if tbl[j] > 0:
+            #     tbl[j] = tbl[j - i**3] + 1
+            #     last[j] = i
+            tbl[j] = min(tbl[j], tbl[j - i**3] + 1)
+            last[j] = i
+            i += 1
+    cubes = []
+    current = n
+    while current > 0:
+        cubes.append(last[current])
+        current -= last[current]**3
+    return tbl[-1], cubes[::-1]
+    
+
 if __name__ == '__main__':
     # print(exp(2, 10))
     # print(fibonacci(5))
@@ -108,7 +153,12 @@ if __name__ == '__main__':
     # print(binom(6, 3))
     # print(subsets(list(range(10)), 4))
     # print(submessages('aba'))
-    print(take_to_space([1, 2, 3], 3))
+    # print(take_to_space([1, 2, 3], 3))
     # print(passwords(2))
     # print(slogan(["modern", "cool", "abysmal"], 13))
+    # print(passwords(5, ["hello", "oh"]))
+
+    # should print (3, [1, 1, 2])
+    # the order of boxes might be different
+    print(num_boxes(237))
     

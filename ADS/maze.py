@@ -49,6 +49,7 @@ def fastest_escapes(maze, i=0, j=0):
         result = list(filter(lambda x: len(x) == min_path, result))
     return result
 
+
 def weighted_escape_length(maze, w, i=0, j=0):
     n = len(maze)
     m = len(maze[0])
@@ -62,6 +63,7 @@ def weighted_escape_length(maze, w, i=0, j=0):
             result = min(result, weighted_escape_length(maze, w, a, b) + w_here)
     maze[i][j] = 0 if maze[i][j] == -1 else 1
     return result
+
 
 def weighted_escapes(maze, w, i=0, j=0):
     n = len(maze)
