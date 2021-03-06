@@ -17,7 +17,7 @@ def calc_rain_water(h):
     return water
 
 
-# some test code
+# some test.py code
 if __name__ == "__main__":
     test_h = [2, 5, 2, 3, 6, 9, 1, 3, 4, 6, 1]
     # should print 15

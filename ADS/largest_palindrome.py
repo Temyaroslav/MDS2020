@@ -57,7 +57,7 @@ def largest_palindrome(s):
     return s[max_start_idx:max_end_idx + 1]
 
 
-# some test code
+# some test.py code
 if __name__ == "__main__":
     test_s = 'ABBCB'
     # should print BCB

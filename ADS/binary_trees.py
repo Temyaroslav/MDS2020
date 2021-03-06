@@ -40,12 +40,6 @@ def _count_distinct(root: Node, keys: set):
     if root is None:
         return keys
 
-    # total = _count_distinct(root.left, total)
-    # if root.right is not None and root.right.key == root.key:
-    #     total = total
-    # else:
-    #     total += 1
-    # total = _count_distinct(root.right, total)
     res_left = _count_distinct(root.left, keys)
     res_right = _count_distinct(root.right, keys)
 

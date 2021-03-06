@@ -118,7 +118,7 @@ def sliding_window_min(a, k):
     return window
 
 
-# some test code
+# some test.py code
 if __name__ == "__main__":
     test_a, test_k = [12, 1, 78, 90, 57, 89, 56], 3
     # should print [1, 3, 2, 2]

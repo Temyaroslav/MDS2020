@@ -96,7 +96,7 @@ def weighted_escapes(maze, w, i=0, j=0):
     return result
 
 
-# some test code
+# some test.py code
 if __name__ == "__main__":
     test_a = [
         [0, 0, 0],
