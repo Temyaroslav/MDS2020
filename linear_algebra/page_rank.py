@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[116]:
-
-
 import numpy as np
 
 # A = np.array([[0, 1, 1, 0, 0, 0],
@@ -42,10 +36,6 @@ print('eigenvector', eigenvector, sep='\n\n', end='\n\n')
 
 vertex = eigenvector.index(max(eigenvector))
 print('The most influenced vertex in this graph (numbering starts from 0) is', vertex)
-
-
-# In[ ]:
-
 
 
 

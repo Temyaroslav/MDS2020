@@ -32,13 +32,15 @@ def factorial(n):
         return 1
     return n * factorial(n - 1)
 
-def binom(n, k):
+
+def binomial_coef(n, k):
     '''
     fn: Newton binom using recursion
     '''
     if k == 0 or n == k:
         return 1
-    return binom(n - 1, k) + binom(n - 1, k - 1)
+    return binomial_coef(n - 1, k) + binomial_coef(n - 1, k - 1)
+
 
 def subsets2(elems):
     if not elems:
@@ -48,6 +50,7 @@ def subsets2(elems):
     for i in range(len(result)):
         result.append(result[i] + [last])
     return result
+
 
 def subsets(elems, k):
     if k == 0:
