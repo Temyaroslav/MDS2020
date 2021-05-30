@@ -1,0 +1,18 @@
+XML and JSON
+https://www.w3schools.com/js/js_json_xml.asp
+https://www.guru99.com/json-vs-xml-difference.html
+https://hackr.io/blog/json-vs-xml
+
+Excel
+https://hackr.io/blog/json-vs-xml
+https://openpyxl.readthedocs.io/en/stable/
+
+PDF and images
+https://towardsdatascience.com/how-to-extract-text-from-images-with-python-db9b87fe432b
+https://medium.com/better-programming/beginners-guide-to-tesseract-ocr-using-python-10ecbb426c3d
+https://towardsdatascience.com/create-simple-optical-character-recognition-ocr-with-python-6d90adb82bb8
+https://nanonets.com/blog/ocr-with-tesseract/
+https://www.pyimagesearch.com/2018/07/19/opencv-tutorial-a-guide-to-learn-opencv/
+https://www.geeksforgeeks.org/opencv-python-tutorial/
+https://docs.opencv.org/master/d6/d00/tutorial_py_root.html
+

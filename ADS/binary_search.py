@@ -17,6 +17,7 @@ def merge(a, b):
     return result
 
 
+
 def mergesort(a):
     if len(a) <= 1:
         return a

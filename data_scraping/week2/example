@@ -1,0 +1,8 @@
+{
+    "mail": {
+        "to": "Mark",
+        "from": "Jani",
+        "heading": "Reminder from Jani",
+        "body": "Hi, Mark! Remember we are meeting tomorrow at 5"
+    }
+}
