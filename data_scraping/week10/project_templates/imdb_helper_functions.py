@@ -27,7 +27,9 @@ def has_valid_parentheses(s) -> bool:
 
 def check_bad_movie_type(s) -> bool:
     # check if the movie string contains a bad movie type
-    bad_types = ['TV Series', 'Short', 'Video Game', 'Video short', 'Video', 'TV Movie', 'TV Mini-Series', 'TV Series short', 'TV Special', 'Documentary short', 'Documentary', 'voice', 'uncredited', 'unconfirmed']
+    bad_types = ['TV Series', 'Short', 'Video Game', 'Video short', 'Video', 
+    'TV Movie', 'TV Mini-Series', 'TV Series short', 'TV Mini Series', 'TV Special', 'Documentary short',
+     'Documentary', 'voice', 'uncredited', 'unconfirmed']
     for bad_type in bad_types:
         if bad_type in s:
             return True
@@ -51,3 +53,7 @@ def extract_movie_name_url(el):
     result = el.find('b')
     result.extract()
     return result.text.strip(), result.find('a')['href']
+
+def extract_actor_name_from_soup(actor_page_soup):
+    name = actor_page_soup.find('span', attrs={'itemprop'}).text
+    return name
