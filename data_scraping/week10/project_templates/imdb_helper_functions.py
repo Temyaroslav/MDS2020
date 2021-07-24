@@ -1,3 +1,6 @@
+import os
+import pickle
+
 def check_correct_cast_el(el) -> bool:
     # check if an element in the cast table has the correct structure
     if 'class' in el.attrs:
@@ -57,3 +60,22 @@ def extract_movie_name_url(el):
 def extract_actor_name_from_soup(actor_page_soup):
     name = actor_page_soup.find('span', attrs={'itemprop'}).text
     return name
+
+def get_cache():
+    if os.path.exists('movies_cache.pickle'):
+        with open('movies_cache.pickle', 'rb') as f:
+            movies_cache = pickle.load(f)
+    else:
+        movies_cache = {}
+    if os.path.exists('actors_cache.pickle'):
+        with open('actors_cache.pickle', 'rb') as f:
+            actors_cache = pickle.load(f)
+    else:
+        actors_cache = {}
+    return actors_cache, movies_cache
+
+def update_cache(actors_cache: dict, movies_cache: dict):
+    with open('movies_cache.pickle', 'wb') as f:
+            pickle.dump(movies_cache, f)
+    with open('actors_cache.pickle', 'wb') as f:
+        pickle.dump(actors_cache, f)
