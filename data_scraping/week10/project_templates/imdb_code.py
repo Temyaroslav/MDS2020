@@ -2,12 +2,14 @@
 # and put them in `imdb_helper_functions` module.
 # you can import them and use here like that:
 import asyncio
+import ssl
 import aiohttp
 import numpy as np
 import requests
 import urllib
 import re
 from bs4 import BeautifulSoup
+from requests.models import Response
 from imdb_helper_functions import *
 
 def get_actors_by_movie_soup(cast_page_soup: BeautifulSoup, num_of_actors_limit: int = None) -> list:
@@ -86,6 +88,22 @@ async def get_async(name_urls: set, is_actor_soup: bool, num_of_movies_limit: in
                     continue
     return output
 
+async def get_async_movies_descriptions(movies: list):
+    output = []
+    async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(limit_per_host=1)) as session:
+        for movie in movies:
+            print(movie)
+            async with session.get(movie[1], ssl=False) as response:
+                text = await response.text()
+                soup = BeautifulSoup(text, 'html.parser')
+                output.append(get_movie_description_from_soup(soup))
+                # try:
+                #     output.append(get_movie_description_from_soup(soup))
+                # except:
+                #     print(f'Some issue with getting movie description from {movie[0]} - {movie[1]}')
+                #     continue
+
+    return output
 
 def __check_distance(actor_end: tuple,
                      actors_to_check: list,
@@ -208,21 +226,26 @@ def get_movie_distance(actor_start_url: str, actor_end_url: str,
 
 
 def get_movie_descriptions_by_actor_soup(actor_page_soup):
-    # your code here
-    return # your code here
+    # get actor name from the soup
+    actor_name = extract_actor_name_from_soup(actor_page_soup)
+    # get actor movies from the soup
+    actor_movies = get_movies_by_actor_soup(actor_page_soup)
+    descriptions = []
+    for movie in actor_movies:
+        print(movie)
+        response = requests.get(movie[1])
+        assert response.ok, f'Something wrong with {movie[0]} - {movie[1]}'
+        soup = BeautifulSoup(response.text, 'html.parser')
+        des = get_movie_description_from_soup(soup)
+        descriptions.append(des)
+    # descriptions = asyncio.run(get_async_movies_descriptions(actor_movies))
+    with open(f'{actor_name}.txt', 'w') as f:
+        for des in descriptions:
+            f.write(des + '\n')
 
 
 if __name__ == '__main__':
     headers = {'Accept-Language': 'en', 'X-FORWARDED-FOR': '2.21.184.0'}
-
-    # UNIT TEST
-
-    # dist = get_movie_distance('https://www.imdb.com/name/nm0362766/', 'https://imdb.com/name/nm0000288/',
-    # num_of_actors_limit=None, num_of_movies_limit=None, print_path=True)
-    # print(f'Movie distance {dist}')
-
-    # get_movie_path(('Dwayne Johnson', 'https://www.imdb.com/name/nm0425005/'), ('Jackie Chan', 'https://www.imdb.com/name/nm0000329/'))
-
     highest_paid_actors = [
                             ('Dwayne Johnson', 'https://www.imdb.com/name/nm0425005/'),
                             ('Chris Hemsworth', 'https://www.imdb.com/name/nm1165110/'),
@@ -236,9 +259,26 @@ if __name__ == '__main__':
                             ('Chris Evans', 'https://www.imdb.com/name/nm0262635/')
                             ]
 
-    import itertools
+    # UNIT TEST
+    for url in highest_paid_actors:
+        response = requests.get(url[1], headers=headers)
+        assert response.ok
+        soup = BeautifulSoup(response.text, 'html.parser')
+        get_movie_descriptions_by_actor_soup(soup)
 
-    for perm in itertools.permutations(highest_paid_actors, 2):
-        dist = get_movie_distance(perm[0][1], perm[1][1],
-        num_of_actors_limit=5, num_of_movies_limit=5, print_path=True)
-        print(f'Movie distance is {dist}')
+    # UNIT TEST
+
+    # dist = get_movie_distance('https://www.imdb.com/name/nm0362766/', 'https://imdb.com/name/nm0000288/',
+    # num_of_actors_limit=None, num_of_movies_limit=None, print_path=True)
+    # print(f'Movie distance {dist}')
+
+    # get_movie_path(('Dwayne Johnson', 'https://www.imdb.com/name/nm0425005/'), ('Jackie Chan', 'https://www.imdb.com/name/nm0000329/'))
+
+    
+
+    # import itertools
+
+    # for perm in itertools.permutations(highest_paid_actors, 2):
+    #     dist = get_movie_distance(perm[0][1], perm[1][1],
+    #     num_of_actors_limit=5, num_of_movies_limit=5, print_path=True)
+    #     print(f'Movie distance is {dist}')

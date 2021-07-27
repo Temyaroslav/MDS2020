@@ -57,9 +57,12 @@ def extract_movie_name_url(el):
     result.extract()
     return result.text.strip(), result.find('a')['href']
 
-def extract_actor_name_from_soup(actor_page_soup):
+def extract_actor_name_from_soup(actor_page_soup) -> str:
     name = actor_page_soup.find('span', attrs={'itemprop'}).text
     return name
+
+def get_movie_description_from_soup(movie_page_soup) -> str:
+    return movie_page_soup.find('span', attrs={'role': 'presentation', 'data-testid': 'plot-l'}).text
 
 def get_cache():
     if os.path.exists('movies_cache.pickle'):
