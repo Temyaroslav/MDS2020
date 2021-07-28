@@ -1,0 +1,56 @@
+.sidenav {
+  border-style: groove;
+  width: 160px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding-top: 100px;
+  background-color: #f1f1f1;
+}
+
+.header {
+  border-style: solid;
+  width: 100%;
+  height: 100px;
+  top: -1.1ex;
+  left: -1ex;
+  position: relative;
+  z-index: 10;
+  background-color: #333;
+}
+
+.sidenav__title {
+  margin-top: 80px;
+  margin-left: 20px;
+  font-size: 140%;
+}
+
+.header__title,
+.header__subtitle {
+  margin-left: 240px;
+  color: white;
+  font-size: 200%;
+}
+
+.header__title {
+  margin-top: 15px;
+}
+
+.header__subtitle {
+  font-size: 125%;
+}
+
+.main {
+  margin-left: 190px;
+  width: 500px;
+  font-family: Times;
+  text-align: justify;
+}
+
+.poem {
+  width: 260px;
+  margin-left: 50px;
+  font-family: Palatino;
+  text-align: left;
+}

@@ -1,0 +1,79 @@
+.page-header {
+    padding: 128px 16px;
+    margin-top: -10px;
+    margin-left: -10px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(pic.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.page-margin {margin: 16px}
+.page-jumbo {font-size: 64px}
+.page-xlarge {font-size: 24px}
+.page-row-padding {padding: 0 8px}
+.page-top-padding {padding-top: 64px}
+/* table of contents */
+#toc_container {
+    background: #f9f9f9 none repeat scroll 0 0;
+    border: 1px solid #aaa;
+    display: table;
+    font-size: 85%;
+    margin-bottom: 1em;
+    padding: 20px;
+    width: 20%;
+    }
+.toc_title {
+    font-weight: 700;
+    text-align: left;
+}
+
+#toc_container li, #toc_container ul, #toc_container ul li{
+    list-style: outside none none !important;
+}
+.page-content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
+}
+.page-p-header {
+    padding-top: 32px; 
+    padding-bottom: 16px;
+}
+.page-formula{
+    text-align: center; 
+    padding-bottom: 16px;
+}
+.page-pic {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+.page-footer {
+    padding: 0.01em 16px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    text-align: center;
+    opacity:0.60;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+    }
+
+    tr:nth-child(even) {
+    background-color: #dddddd;
+}
+.page-grid-color {color:#000;background-color:#f1f1f1}
+
+li {padding-bottom: 10px;}
+body{font-family: "Lato", sans-serif}
+h1 {font-family: "Montserrat", sans-serif}

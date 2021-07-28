@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Main page</title>
+        <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <h3 style="color:black">Numbers entered: </h3>
+        <h3>{{ticker_1}} and {{ticker_2}}</h3>
+
+        <p>{{ticker_1}} got {{score_1}}% profit</p>
+        <p>{{ticker_2}} got {{score_2}}% profit</p>
+
+        <p>Here is the plot of price change in %</p>
+        <img src="data:image/png;base64, {{picture}}" alt="plot">
+
+    </body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Main page!</title>
+        <link rel="stylesheet"
+            href="{{ url_for('static', path='/style.css') }}">
+    </head>
+    <body>
+        <h3>{{ message }}</h3>
+
+        <p>Plotting numbers</p>
+        
+        <form action="/show_plot" method="post"
+                enctype="multipart/form-data">
+            Enter the numbers comma separated:<br>
+            <input type="text" name="numbers"><br>
+
+            <button type="submit">Plot!</button>
+        </form>
+
+    </body>
+</html>

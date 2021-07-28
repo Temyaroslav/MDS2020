@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Solver</title>
+        <!-- fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- main stylesheet -->
+        <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+        <!-- The following library is used for math equations -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    </head>
+    <body>
+        <h1>Quadratic Equation Solver</h1>
+        <p>Enter the a, b and c coefficients for the polynomial of type:</p>
+
+        <div class="page-content">
+            <p><strong>\(ax^2+bx+c=0\)</strong></p>
+            <form action="/show_plot" method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="a_coef"><strong>\(a=\)</strong></label>
+                    <input type="number" name="a_coef" id="a_coef" placeholder="coefficient a">
+                </div>
+                <br>
+                <div>
+                    <label for="b_coef"><strong>\(b=\)</strong></label>
+                    <input type="number" name="b_coef" id="b_coef" placeholder="coefficient b">
+                </div>
+                <br>
+                <div>
+                    <label for="c_coef"><strong>\(c=\)</strong></label>
+                    <input type="number" name="c_coef" id="c_coef" placeholder="coefficient c">
+                </div>
+                <br>
+                <button type="submit">Plot</button>
+            </form>    
+        </div>
+        
+
+    </body>
+</html>

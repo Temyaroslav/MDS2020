@@ -1,0 +1,4 @@
+1) cd C:\Program Files\PostgreSQL\13\bin
+2) pg_restore -h localhost -U postgres -d name_of_db -v "path to the backup file"
+
+pswd: F_society503
