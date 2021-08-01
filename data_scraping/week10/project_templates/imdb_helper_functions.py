@@ -62,7 +62,7 @@ def extract_actor_name_from_soup(actor_page_soup) -> str:
     return name
 
 def get_movie_description_from_soup(movie_page_soup) -> str:
-    # return movie_page_soup.find('span', attrs={'role': 'presentation', 'data-testid': 'plot-l'}).text
+    # scraping "storyline" paragraph
     des = movie_page_soup.find('div', attrs={'class': 'ipc-html-content ipc-html-content--base'})
     if des is None:
         return str()

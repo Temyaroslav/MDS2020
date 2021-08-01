@@ -2,14 +2,13 @@
 # and put them in `imdb_helper_functions` module.
 # you can import them and use here like that:
 import asyncio
-import ssl
 import aiohttp
 import numpy as np
 import requests
 import urllib
 import re
 from bs4 import BeautifulSoup
-from requests.models import Response
+
 from imdb_helper_functions import *
 
 def get_actors_by_movie_soup(cast_page_soup: BeautifulSoup, num_of_actors_limit: int = None) -> list:
@@ -88,22 +87,6 @@ async def get_async(name_urls: set, is_actor_soup: bool, num_of_movies_limit: in
                     continue
     return output
 
-async def get_async_movies_descriptions(movies: list):
-    output = []
-    async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(limit_per_host=1)) as session:
-        for movie in movies:
-            print(movie)
-            async with session.get(movie[1], ssl=False) as response:
-                text = await response.text()
-                soup = BeautifulSoup(text, 'html.parser')
-                output.append(get_movie_description_from_soup(soup))
-                # try:
-                #     output.append(get_movie_description_from_soup(soup))
-                # except:
-                #     print(f'Some issue with getting movie description from {movie[0]} - {movie[1]}')
-                #     continue
-
-    return output
 
 def __check_distance(actor_end: tuple,
                      actors_to_check: list,
@@ -172,6 +155,7 @@ def __get_movie_path(actor_end, actor_path, movies_path, actors_cache, movies_ca
                     print(x, '->', y, '->')
                 print(actor_end)
 
+
 def get_movie_path(actor_start: tuple, actor_end: tuple, actors_cache: dict = None, movies_cache: dict = None):
     # method used to print all the paths between cached actors
     if actors_cache is None or movies_cache is None:
@@ -224,7 +208,6 @@ def get_movie_distance(actor_start_url: str, actor_end_url: str,
     return np.inf
 
 
-
 def get_movie_descriptions_by_actor_soup(actor_page_soup):
     # get actor name from the soup
     actor_name = extract_actor_name_from_soup(actor_page_soup)
@@ -238,7 +221,6 @@ def get_movie_descriptions_by_actor_soup(actor_page_soup):
         soup = BeautifulSoup(response.text, 'html.parser')
         des = get_movie_description_from_soup(soup)
         descriptions.append(des)
-    # descriptions = asyncio.run(get_async_movies_descriptions(actor_movies))
     with open(f'{actor_name}.txt', 'w') as f:
         for des in descriptions:
             f.write(des + '\n')

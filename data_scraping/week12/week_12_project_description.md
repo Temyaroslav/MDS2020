@@ -91,7 +91,7 @@ Provide a ZIP-archive with these files.
 
 * A function `get_movie_descriptions_by_actor_soup` is implemented - **DONE**
 * Movie descriptions for every highest-paid actor of 2019 are collected and saved to files. The files are present in the archive - **DONE**
-* Final report contains a code for reading movie descriptions from files
-* Final report contains a code for preprocess movie descriptions (concatenation, getting rid of stopword)
-* Final report contains a code for printing out a wordcloud. 
-* FInal report contains 10 wordclouds. One for each actor.
+* Final report contains a code for reading movie descriptions from files - **DONE**
+* Final report contains a code for preprocess movie descriptions (concatenation, getting rid of stopword). - **DONE**
+* Final report contains a code for printing out a wordcloud. - **DONE**
+* FInal report contains 10 wordclouds. One for each actor. - **DONE**
