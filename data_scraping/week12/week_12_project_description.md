@@ -57,7 +57,7 @@ Provide a ZIP-archive with these files.
 
 * An archive contains files `imdb_code.py`, `imdb_helper_functions.py`, report in jupyter notebok format, csv-file containing information about pairwise **movie distances** and text files with movie description for every actor.
 
-**Week 10 criteria**
+**Week 10 criteria** - **DONE**
 
 * The functions implementation is present
 * The functions somehow work, i.e. they return something for a given input
@@ -70,7 +70,7 @@ Provide a ZIP-archive with these files.
 * The function `get_actors_by_movie_soup` returns both male and female actors that played in the movie
 * The function `get_actors_by_movie_soup` returns only actors (not some other crew members)
 
-**Week 11 criteria**
+**Week 11 criteria** - **DONE**
 
 * The functions implementation is present
 * The function `get_movie_distance` somehow works, i.e. it returns something for a given input
@@ -78,19 +78,19 @@ Provide a ZIP-archive with these files.
 * The functions return format is correct (integer number)
 * The functions `get_movie_distance` have a possibility to limit the number of movies or actors, i.e. arguments `num_of_actors_limit` and `num_of_movies_limit` could be passed and used inside the function
 
-**Week 12 criteria - Network graphs**
+**Week 12 criteria - Network graphs** - **DONE**
 
-* Final report has a code for plotting a network
-* Final report has pictures of graphs
-* Every node has a label (actor name)
-* Every edge has a label (**movie distance** number, if it is less the infinity)
-* Final report has pictures of graph of all pairwise **movie distances**. Edges for different **movie distances** are of different colours. For example, red colour for edges for **movie distances** equal to 1, green colour - for **movie distance** equal to 2, and so on.
-* Final report has different pictures of graphs for different **movie distances**. There is a picture of a graph, where **movie distances** equal to 1 are visualised. Then there is a different picture, but where edges of **movie distances** equal to 2 only are visualised. And so on, for all different **movie distances** present.
+* Final report has a code for plotting a network - **DONE**
+* Final report has pictures of graphs - **DONE**
+* Every node has a label (actor name) - **DONE**
+* Every edge has a label (**movie distance** number, if it is less the infinity) - **DONE**
+* Final report has pictures of graph of all pairwise **movie distances**. Edges for different **movie distances** are of different colours. For example, red colour for edges for **movie distances** equal to 1, green colour - for **movie distance** equal to 2, and so on. - **DONE**
+* Final report has different pictures of graphs for different **movie distances**. There is a picture of a graph, where **movie distances** equal to 1 are visualised. Then there is a different picture, but where edges of **movie distances** equal to 2 only are visualised. And so on, for all different **movie distances** present. - **DONE**
 
 **Week 12 criteria - wordcloud**
 
-* A function `get_movie_descriptions_by_actor_soup` is implemented
-* Movie descriptions for every highest-paid actor of 2019 are collected and saved to files. The files are present in the archive
+* A function `get_movie_descriptions_by_actor_soup` is implemented - **DONE**
+* Movie descriptions for every highest-paid actor of 2019 are collected and saved to files. The files are present in the archive - **DONE**
 * Final report contains a code for reading movie descriptions from files
 * Final report contains a code for preprocess movie descriptions (concatenation, getting rid of stopword)
 * Final report contains a code for printing out a wordcloud. 
