@@ -1,4 +1,11 @@
+Import:
+
 1) cd C:\Program Files\PostgreSQL\13\bin
 2) pg_restore -h localhost -U postgres -d name_of_db -v "path to the backup file"
+
+Export:
+
+1) cd C:\Program Files\PostgreSQL\13\bin
+2) pg_dump -h localhost -U postgres -F c -b -v -f "path to dump file" name_of_db
 
 pswd: F_society503

@@ -1,0 +1,91 @@
+actor_start,actor_end,distance
+Dwayne Johnson,Chris Hemsworth,2
+Dwayne Johnson,Robert Downey Jr.,2
+Dwayne Johnson,Akshay Kumar,3
+Dwayne Johnson,Jackie Chan,3
+Dwayne Johnson,Bradley Cooper,3
+Dwayne Johnson,Adam Sandler,3
+Dwayne Johnson,Scarlett Johansson,2
+Dwayne Johnson,Sofia Vergara,3
+Dwayne Johnson,Chris Evans,2
+Chris Hemsworth,Dwayne Johnson,3
+Chris Hemsworth,Robert Downey Jr.,1
+Chris Hemsworth,Akshay Kumar,3
+Chris Hemsworth,Jackie Chan,3
+Chris Hemsworth,Bradley Cooper,3
+Chris Hemsworth,Adam Sandler,2
+Chris Hemsworth,Scarlett Johansson,1
+Chris Hemsworth,Sofia Vergara,3
+Chris Hemsworth,Chris Evans,1
+Robert Downey Jr.,Dwayne Johnson,3
+Robert Downey Jr.,Chris Hemsworth,1
+Robert Downey Jr.,Akshay Kumar,inf
+Robert Downey Jr.,Jackie Chan,inf
+Robert Downey Jr.,Bradley Cooper,2
+Robert Downey Jr.,Adam Sandler,3
+Robert Downey Jr.,Scarlett Johansson,1
+Robert Downey Jr.,Sofia Vergara,3
+Robert Downey Jr.,Chris Evans,1
+Akshay Kumar,Dwayne Johnson,3
+Akshay Kumar,Chris Hemsworth,3
+Akshay Kumar,Robert Downey Jr.,inf
+Akshay Kumar,Jackie Chan,inf
+Akshay Kumar,Bradley Cooper,inf
+Akshay Kumar,Adam Sandler,3
+Akshay Kumar,Scarlett Johansson,inf
+Akshay Kumar,Sofia Vergara,inf
+Akshay Kumar,Chris Evans,inf
+Jackie Chan,Dwayne Johnson,inf
+Jackie Chan,Chris Hemsworth,3
+Jackie Chan,Robert Downey Jr.,inf
+Jackie Chan,Akshay Kumar,inf
+Jackie Chan,Bradley Cooper,inf
+Jackie Chan,Adam Sandler,inf
+Jackie Chan,Scarlett Johansson,inf
+Jackie Chan,Sofia Vergara,inf
+Jackie Chan,Chris Evans,inf
+Bradley Cooper,Dwayne Johnson,2
+Bradley Cooper,Chris Hemsworth,3
+Bradley Cooper,Robert Downey Jr.,3
+Bradley Cooper,Akshay Kumar,3
+Bradley Cooper,Jackie Chan,inf
+Bradley Cooper,Adam Sandler,3
+Bradley Cooper,Scarlett Johansson,3
+Bradley Cooper,Sofia Vergara,3
+Bradley Cooper,Chris Evans,3
+Adam Sandler,Dwayne Johnson,2
+Adam Sandler,Chris Hemsworth,2
+Adam Sandler,Robert Downey Jr.,2
+Adam Sandler,Akshay Kumar,3
+Adam Sandler,Jackie Chan,3
+Adam Sandler,Bradley Cooper,2
+Adam Sandler,Scarlett Johansson,2
+Adam Sandler,Sofia Vergara,2
+Adam Sandler,Chris Evans,2
+Scarlett Johansson,Dwayne Johnson,2
+Scarlett Johansson,Chris Hemsworth,1
+Scarlett Johansson,Robert Downey Jr.,1
+Scarlett Johansson,Akshay Kumar,3
+Scarlett Johansson,Jackie Chan,inf
+Scarlett Johansson,Bradley Cooper,2
+Scarlett Johansson,Adam Sandler,3
+Scarlett Johansson,Sofia Vergara,3
+Scarlett Johansson,Chris Evans,1
+Sofia Vergara,Dwayne Johnson,3
+Sofia Vergara,Chris Hemsworth,2
+Sofia Vergara,Robert Downey Jr.,3
+Sofia Vergara,Akshay Kumar,3
+Sofia Vergara,Jackie Chan,3
+Sofia Vergara,Bradley Cooper,2
+Sofia Vergara,Adam Sandler,2
+Sofia Vergara,Scarlett Johansson,3
+Sofia Vergara,Chris Evans,2
+Chris Evans,Dwayne Johnson,3
+Chris Evans,Chris Hemsworth,1
+Chris Evans,Robert Downey Jr.,1
+Chris Evans,Akshay Kumar,3
+Chris Evans,Jackie Chan,inf
+Chris Evans,Bradley Cooper,2
+Chris Evans,Adam Sandler,3
+Chris Evans,Scarlett Johansson,1
+Chris Evans,Sofia Vergara,3
