@@ -1,4 +1,4 @@
-import tqdm
+from tqdm import tqdm
 import pickle
 import numpy as np
 import pandas as pd
@@ -6,14 +6,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from sklearn.metrics import accuracy_score, f1_score
+from strategies import BaseStrategy
 
 
 class BackTester:
     def __init__(self, 
                  data: pd.DataFrame, 
-                 strategy,
+                 strategy: BaseStrategy,
                  window: int, 
-                 refit_window: int):
+                 refit_window):
         '''
             data: data for backtesting
             strategy: strategy class to backtest
@@ -32,12 +33,18 @@ class BackTester:
             # slice the window
             X = self.data.iloc[idx:idx + self.window, :]
             # check if it is time to refit
-            if i % self.refit_window == 0:
-                self.strategy.fit(X)
+            if type(self.refit_window) is int:
+                if i % self.refit_window == 0:
+                    self.strategy.fit(X)
+            else:
+                self.refit_window.fit(X)
+                refit_signal = self.refit_window.predict(X)
+                if refit_signal:
+                    self.strategy.fit(X)
             # make one step prediction
             pred = self.strategy.predict(X)
             predictions.append(pred)
-
+        
         self.data['Pred'] = predictions
         
         # cache results
