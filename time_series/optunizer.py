@@ -30,7 +30,7 @@ def objective(trial):
 
     lgbcv = lgb.cv(param,
                    dtrain,
-                   folds=cv.split(X=X_train, y=y_train, groups=groups),
+                   folds=cv.split(X=X, y=y, groups=groups),
                    verbose_eval=False,
                    early_stopping_rounds=250,
                    num_boost_round=10000,
@@ -42,39 +42,46 @@ def objective(trial):
     return cv_score
 
 
-df = DataLoader.load('ibm_trainval', sampling='3H')
-df_1h = DataLoader.load('ibm_trainval', sampling='1H')
-df_1d = DataLoader.load('ibm_trainval', sampling='1D')
-df_1h.drop(['Open', 'High', 'Low', 'Close', 'Volume', 'target'], axis=1, inplace=True)
-df_1d.drop(['Open', 'High', 'Low', 'Close', 'target'], axis=1, inplace=True)
-df_1h.columns = [x + '_1H' for x in df_1h.columns]
-df_1d.columns = [x + '_1D' for x in df_1d.columns]
-df = df.merge(df_1h, left_on='Date', right_on='Date_1H')
-df.drop(['Date_1H'], axis=1, inplace=True)
-df['tmp'] = df['Date'].dt.date.astype('datetime64')
-df = df.merge(df_1d, left_on='tmp', right_on='Date_1D')
-df.drop(['tmp', 'Date_1D'], axis=1, inplace=True)
-del df_1h, df_1d
+# df = DataLoader.load('ibm_trainval', sampling='3H')
+# df_1h = DataLoader.load('ibm_trainval', sampling='1H')
+# df_1d = DataLoader.load('ibm_trainval', sampling='1D')
+# df_1h.drop(['Open', 'High', 'Low', 'Close', 'Volume', 'target'], axis=1, inplace=True)
+# df_1d.drop(['Open', 'High', 'Low', 'Close', 'target'], axis=1, inplace=True)
+# df_1h.columns = [x + '_1H' for x in df_1h.columns]
+# df_1d.columns = [x + '_1D' for x in df_1d.columns]
+# df = df.merge(df_1h, left_on='Date', right_on='Date_1H')
+# df.drop(['Date_1H'], axis=1, inplace=True)
+# df['tmp'] = df['Date'].dt.date.astype('datetime64')
+# df = df.merge(df_1d, left_on='tmp', right_on='Date_1D')
+# df.drop(['tmp', 'Date_1D'], axis=1, inplace=True)
+# del df_1h, df_1d
 
-X_train, X_test, y_train, y_test = train_test_split(df.drop('target', axis=1), df['target'], test_size=0.2,
-                                                    shuffle=False)
-dtrain = lgb.Dataset(X_train.drop('Date', axis=1), label=y_train)
-groups = pd.factorize(X_train['Date'].dt.day.astype(str) + '_' + \
-                      X_train['Date'].dt.month.astype(str) + '_' + \
-                      X_train['Date'].dt.year.astype(str))[0]
-cv = PurgedGroupTimeSeriesSplit(n_splits=3, group_gap=20*3, max_train_group_size=252*3*3,
+with open('ibm_extended.pkl', 'rb') as f:
+    df = pickle.load(f)
+# make sure we only use trainval part of the data
+df = df[df['Date'] <= '2016-08-04 15:00:00']
+
+# X_train, X_test, y_train, y_test = train_test_split(df.drop('target', axis=1), df['target'], test_size=0.2,
+#                                                     shuffle=False)
+
+X, y = df.drop('target', axis=1), df['target']
+dtrain = lgb.Dataset(X.drop('Date', axis=1), label=y)
+groups = pd.factorize(X['Date'].dt.day.astype(str) + '_' + \
+                      X['Date'].dt.month.astype(str) + '_' + \
+                      X['Date'].dt.year.astype(str))[0]
+cv = PurgedGroupTimeSeriesSplit(n_splits=3, group_gap=0, max_train_group_size=252*3*4,
                                 max_test_group_size=252*3)
 optuna.logging.set_verbosity(optuna.logging.WARNING)
 study = optuna.create_study(direction='minimize')
-study.optimize(objective, timeout=10800)
+study.optimize(objective, timeout=3600*1)
 
 print('Number of finished trials:', len(study.trials))
 print('Best trial:', study.best_trial.params)
 
 # saving the best hyperparameters values
-with open('lgbm_param_extended.json', 'w') as f:
+with open('lgbm_param_extended_no_gap.json', 'w') as f:
     json.dump(study.best_trial.params, f)
 
 # saving the study
-with open('lgbm_optuna_study.pkl', 'wb') as f:
+with open('lgbm_optuna_study_no_gap.pkl', 'wb') as f:
     pickle.dump(study, f)

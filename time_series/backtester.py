@@ -66,7 +66,7 @@ class BackTester:
         plt.figure(figsize=(10, 8))
         # plot buy&hold benchmark
         plt.plot(data['Date'], data['Close'].diff().cumsum(), c='red', label='Buy&Hold')
-        plt.plot(data['Date'], data['Close'].diff().mul(data['Pred']).cumsum(), c='C0', label=self.strategy.__class__.__name__)
+        plt.plot(data['Date'], data['   Close'].diff().mul(data['Pred']).cumsum(), c='C0', label=self.strategy.__class__.__name__)
         plt.grid()
         plt.legend()
         plt.title('PnL results')

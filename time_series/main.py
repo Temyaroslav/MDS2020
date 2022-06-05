@@ -14,7 +14,7 @@ from strategies.hmm import StrategyHMM
 
 
 def main():
-    df = DataLoader.load('ibm', sampling='3H', feature_sampling=3, year_start=2000)
+    df = DataLoader.load('ibm', sampling='3H', year_start=2000)
     # X_train, X_test, _, _ = train_test_split(df, df['target'], test_size=0.2, shuffle=False)
 
     window = 3*252*5
@@ -37,8 +37,8 @@ def main():
 
     backtester = BackTester(data=df,
                             strategy=strategy,
-                            window=3*252*2,
-                            refit_window=95)
+                            window=3*252*3,
+                            refit_window=15)
     backtester.run()
     # backtester.plot_pnl(False, 'StrategyARIMA_1512_756.pkl')
 

@@ -156,27 +156,36 @@ class DataLoader:
         data['ln_Close'] = np.log(data['Close'] / data['Close'].shift(1))
 
         # simple ratios/diffs
-        data['shadow_up'] = data['High'] - np.maximum(data['Close'], data['Open'])
-        data['shadow_down'] = np.minimum(data['Close'], data['Open']) - data['Low']
-        data["hl_ratio"] = data['High'] / data['Low']
-        data["oc_diff"] = data['Open'] - data['Close']
+        data[f'shadow_up_{sampling}'] = data['High'] - np.maximum(data['Close'], data['Open'])
+        data[f'shadow_down_{sampling}'] = np.minimum(data['Close'], data['Open']) - data['Low']
+        data[f"hl_ratio_{sampling}"] = data['High'] / data['Low']
+        data[f"oc_diff_{sampling}"] = data['Open'] - data['Close']
 
-        # Moving averages - 20, 50, 100, 200 sessions (adjusted by the sampling)
-        data['MA20'] = data['Close'].rolling(window=20).mean()
-        data['MA50'] = data['Close'].rolling(window=50).mean()
-        data['MA100'] = data['Close'].rolling(window=100).mean()
-        data['MA200'] = data['Close'].rolling(window=200).mean()
+        # Moving averages - 20, 50, 100, 200 observations
+        data[f'MA20_{sampling}'] = data['Close'].rolling(window=20).mean()
+        data[f'MA50_{sampling}'] = data['Close'].rolling(window=50).mean()
+        data[f'MA100_{sampling}'] = data['Close'].rolling(window=100).mean()
+        data[f'MA200_{sampling}'] = data['Close'].rolling(window=200).mean()
+        data[f'MA200-MA100_{sampling}'] = data[f'MA200_{sampling}'] - data[f'MA100_{sampling}']
+        data[f'MA200-MA50_{sampling}'] = data[f'MA200_{sampling}'] - data[f'MA50_{sampling}']
+        data[f'MA200-MA20_{sampling}'] = data[f'MA200_{sampling}'] - data[f'MA20_{sampling}']
+        data[f'MA100-MA50_{sampling}'] = data[f'MA100_{sampling}'] - data[f'MA50_{sampling}']
+        data[f'MA100-MA20_{sampling}'] = data[f'MA100_{sampling}'] - data[f'MA20_{sampling}']
+        data[f'MA50-MA20_{sampling}'] = data[f'MA50_{sampling}'] - data[f'MA20_{sampling}']
 
-        # Exponential weighted moving averages - 8, 20 sessions
-        data['EWMA8'] = data['Close'].ewm(span=8, min_periods=8, adjust=False).mean()
-        data['EWMA20'] = data['Close'].ewm(span=20, min_periods=20, adjust=False).mean()
+        # Exponential weighted moving averages - 8, 20 observations
+        data[f'EWMA8_{sampling}'] = data['Close'].ewm(span=8, min_periods=8, adjust=False).mean()
+        data[f'EWMA20_{sampling}'] = data['Close'].ewm(span=20, min_periods=20, adjust=False).mean()
         # Moving average convergence/divergence
-        data['MACD'] = data['EWMA20'] - data['EWMA8']
+        data[f'MACD_{sampling}'] = data[f'EWMA20_{sampling}'] - data[f'EWMA8_{sampling}']
 
-        # Bollinger Bands - 20 sessions, 2 std dev
+        # Bollinger Bands - 20 observations, 2 std dev
         data['MA20_std'] = data['Close'].rolling(window=20).std()
-        data['BB_high'] = data['MA20'] + 2 * data['MA20_std']
-        data['BB_low'] = data['MA20'] - 2 * data['MA20_std']
+        data[f'BB_high_{sampling}'] = data[f'MA20_{sampling}'] + 2 * data['MA20_std']
+        data[f'BB_low_{sampling}'] = data[f'MA20_{sampling}'] - 2 * data['MA20_std']
+        data[f'BB_highlow_{sampling}'] = data[f'BB_high_{sampling}'] / data[f'BB_low_{sampling}']
+        data[f'BB_high_dist_{sampling}'] = data[f'BB_high_{sampling}'] - data['Close']
+        data[f'BB_low_dist_{sampling}'] = data['Close'] - data[f'BB_low_{sampling}']
         data.drop(['MA20_std'], axis=1, inplace=True)
 
         # RSI
@@ -186,14 +195,14 @@ class DataLoader:
         ema_up = up.ewm(com=14, min_periods=14, adjust=False).mean()
         ema_down = down.ewm(com=14, min_periods=14, adjust=False).mean()
         rs = ema_up / ema_down
-        data['RSI'] = 100 - (100 / (1 + rs))
+        data[f'RSI_{sampling}'] = 100 - (100 / (1 + rs))
         del delta, up, down, ema_up, ema_down, rs
 
-        # realised volatility - 8, 20 sessions (https://www.realvol.com/VolFormula.htm)
-        samples_in_session = {'1H': 7, '3H': 3, '1D': 1}
+        # realised volatility - 8, 20 observations (https://www.realvol.com/VolFormula.htm)
+        samples_in_session = {'1H': 7, '3H': 3, '1D': 1, '1W': 0.2}
         rvol = lambda x: np.sqrt(np.sum(x ** 2) * 252 / (len(x) // samples_in_session[sampling])) * 100
-        data['VOL8'] = data['ln_Close'].rolling(8).apply(rvol)
-        data['VOL20'] = data['ln_Close'].rolling(20).apply(rvol)
+        data[f'VOL8_{sampling}'] = data['ln_Close'].rolling(8).apply(rvol)
+        data[f'VOL20_{sampling}'] = data['ln_Close'].rolling(20).apply(rvol)
 
         data.dropna(inplace=True)
 
